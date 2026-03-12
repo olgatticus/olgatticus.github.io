@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Olga Zaghen — PhD student at AMLab, University of Amsterdam, working on Geometric Deep Learning.">
+    <title>Olga Zaghen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#beyond">Beyond Research</a></li>
+        <li><a href="blog.html">Blog</a></li>
+    </ul>
+</nav>
+
+<main>
+
+    <!-- ── About ── -->
+    <section id="about">
+        <h1>Olga Zaghen</h1>
+        <p class="tagline">PhD Student &middot; Geometric Deep Learning &middot; University of Amsterdam</p>
+
+        <!--
+            To add a profile photo, place your image (e.g. photo.jpg) in this folder,
+            then uncomment and adjust the line below:
+            <img src="photo.jpg" alt="Olga Zaghen" style="width:140px;border-radius:50%;margin-bottom:1.5rem;">
+        -->
+
+        <div class="bio-box">
+            <p>👋 Hello world!</p>
+            <p>
+                I am a PhD student in <a href="https://amlab.science.uva.nl/" target="_blank">AMLab</a>,
+                at the <strong>University of Amsterdam</strong>, supervised by
+                Prof. <a href="https://ebekkers.github.io/" target="_blank">Erik Bekkers</a> and
+                Prof. <a href="https://www.unibo.it/sitoweb/rita.fioresi/" target="_blank">Rita Fioresi</a>.
+                I am working on <em>Geometric Deep Learning</em> topics as part of the
+                CaLIForNIA Marie Skłodowska-Curie Doctoral Network.
+            </p>
+            <p>
+                My research interests involve generative models for structured data,
+                graphs, geometry and AI for global sustainability.
+            </p>
+            <p>
+                Previously, I was a research intern at <strong>EPFL</strong>, supervised by
+                Prof. <a href="https://www.epfl.ch/labs/lts4/people/people-current/frossard/" target="_blank">Pascal Frossard</a>
+                and Prof. <a href="https://www.ucl.ac.uk/iccs/dr-laura-toni" target="_blank">Laura Toni</a>,
+                working on discrete diffusion models for graph generation.
+                Before EPFL, I was a research intern at <strong>KAIST</strong> with
+                Prof. <a href="https://maga33.github.io/" target="_blank">Seunghoon Hong</a> and
+                <a href="https://jw9730.github.io/" target="_blank">Jinwoo Kim</a>,
+                working on deep learning models for graph data based on random walks.
+            </p>
+            <p>
+                I wrote my <a href="https://arxiv.org/abs/2403.00337" target="_blank">MSc Thesis</a>
+                on Sheaf Neural Networks in the Computer Laboratory at the
+                <strong>University of Cambridge</strong> under the supervision of
+                Prof. <a href="https://www.cst.cam.ac.uk/people/pl219" target="_blank">Pietro Liò</a> and
+                Prof. <a href="http://disi.unitn.it/~passerini/" target="_blank">Andrea Passerini</a>.
+            </p>
+            <p><strong>If you want to chat, feel free to contact me via email!</strong> ☺️</p>
+        </div>
+
+        <div class="social-links">
+            <a href="mailto:o.zaghen@uva.nl">📧 Email</a>
+            <a href="https://twitter.com/olgazaghen" target="_blank">𝕏 Twitter / X</a>
+            <a href="https://www.linkedin.com/in/olga-zaghen/" target="_blank">🔗 LinkedIn</a>
+            <a href="https://github.com/olgatticus" target="_blank">👾 GitHub</a>
+            <a href="https://scholar.google.se/citations?hl=en&user=5LxnYUwAAAAJ" target="_blank">👩🏼‍💻 Google Scholar</a>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- ── Publications ── -->
+    <section id="publications">
+        <h2>Selected Publications</h2>
+        <p class="section-note">
+            Full list on my <a href="https://scholar.google.se/citations?hl=en&user=5LxnYUwAAAAJ" target="_blank">Google Scholar</a>
+            &nbsp;·&nbsp; * equal contribution
+        </p>
+        <div id="publications-list">
+            <!-- Rendered by publications.js -->
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- ── Beyond Research ── -->
+    <section id="beyond">
+        <h2>Beyond Research</h2>
+        <p>Things I love include:</p>
+        <ul>
+            <li>House music (future / tech / Chicago / deep house to be very specific). I dance shuffle and cutting shapes, and also started learning DJ!</li>
+            <li>I love dancing in general, and trying out new styles. I also enjoy singing and karaokes.</li>
+            <li>I have a passion for observing people (Italian toxic trait, maybe) and seeing their reactions to socially unexpected behaviors. Best hobby ever.</li>
+            <li>I fell in love with Korea when I lived there and I am now on a mission of spending some time there each year of my life. I also insanely love Korean hip hop music and festivals!</li>
+            <li>My favorite way to relax is doing long walks in nature, and hiking mountains when available.</li>
+            <li>I love exploring the wonderful city where I live, Amsterdam, and last but not least, spending time with my friends (both from Amsterdam and all over the world :))</li>
+        </ul>
+        <p>Happy to meet fellow machine learners with similar passions!</p>
+    </section>
+
+    <hr>
+
+    <!-- ── Blog ── -->
+    <section id="blog">
+        <h2>Blog</h2>
+        <p class="blog-teaser">
+            Coming soon! I'll be writing about research, thoughts on the field,
+            life as a PhD student, and probably a bit about music and travel too.
+        </p>
+        <a href="blog.html">View all posts →</a>
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2025 Olga Zaghen</p>
+</footer>
+
+<script src="publications.js"></script>
+<script>
+    const list = document.getElementById('publications-list');
+
+    publications.forEach(pub => {
+        const badgeHTML = pub.highlight
+            ? `<span class="pub-badge pub-badge--${pub.highlight.toLowerCase().replace(/\s+/g, '-')}">${pub.highlight}</span>`
+            : '';
+
+        const item = document.createElement('div');
+        item.className = 'pub-item';
+        item.innerHTML = `
+            <div class="pub-title">${pub.title}</div>
+            <div class="pub-authors">${pub.authors}</div>
+            <div class="pub-venue">
+                <a href="${pub.url}" target="_blank">${pub.venue}</a>
+                <span class="pub-year">(${pub.year})</span>
+                ${badgeHTML}
+            </div>
+        `;
+        list.appendChild(item);
+    });
+
+    // Highlight active nav link based on scroll position
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+                });
+            }
+        });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

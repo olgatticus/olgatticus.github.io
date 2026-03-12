@@ -1,0 +1,311 @@
+/* ============================================================
+   Olga Zaghen — Academic Page
+   style.css
+   ============================================================ */
+
+:root {
+    --color-bg:             #ffffff;
+    --color-bg-subtle:      #f8f8f8;
+    --color-text:           #1a1a1a;
+    --color-text-secondary: #555555;
+    --color-link:           #0066cc;
+    --color-link-hover:     #004499;
+    --color-border:         #e4e4e4;
+
+    /* Publication highlight badges */
+    --badge-spotlight-text: #92400e;
+    --badge-spotlight-bg:   #fffbeb;
+    --badge-spotlight-bdr:  #f6d860;
+    --badge-oral-text:      #276749;
+    --badge-oral-bg:        #f0fff4;
+    --badge-oral-bdr:       #9ae6b4;
+    --badge-review-text:    #4a5568;
+    --badge-review-bg:      #edf2f7;
+    --badge-review-bdr:     #cbd5e0;
+
+    --max-width: 720px;
+    --section-gap: 3rem;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── Base ── */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-text);
+    background: var(--color-bg);
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+}
+
+h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+}
+
+p { margin-bottom: 1rem; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--color-link); text-decoration: none; }
+a:hover { color: var(--color-link-hover); text-decoration: underline; }
+
+ul { padding-left: 1.5rem; }
+li { margin-bottom: 0.5rem; }
+
+hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--section-gap) 0;
+}
+
+/* ── Navigation ── */
+nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.93);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.85rem 2rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+nav a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+nav a:hover,
+nav a.active { color: var(--color-text); text-decoration: none; }
+
+/* ── Main layout ── */
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+}
+
+section { scroll-margin-top: 3.5rem; }
+
+/* ── About ── */
+.tagline {
+    color: var(--color-text-secondary);
+    font-size: 0.975rem;
+    margin-bottom: 1.75rem;
+}
+
+/* Bio box — mirrors the Notion aside */
+.bio-box {
+    background: var(--color-bg-subtle);
+    border-left: 3px solid #d0d0d0;
+    border-radius: 0 4px 4px 0;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Social links row */
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.4rem;
+    margin-top: 0.25rem;
+}
+
+.social-links a {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.social-links a:hover { color: var(--color-link); text-decoration: none; }
+
+/* ── Publications ── */
+.section-note {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.75rem;
+    margin-top: -0.5rem;
+}
+
+.pub-item {
+    padding-bottom: 1.6rem;
+    margin-bottom: 1.6rem;
+    border-bottom: 1px solid var(--color-border);
+}
+.pub-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+.pub-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 0.3rem;
+}
+
+.pub-authors {
+    font-size: 0.855rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.3rem;
+    line-height: 1.5;
+}
+
+.pub-venue {
+    font-size: 0.855rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.5rem;
+}
+
+.pub-venue a { font-style: italic; }
+
+.pub-year { color: var(--color-text-secondary); }
+
+/* Highlight badges */
+.pub-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15em 0.55em;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    line-height: 1.6;
+}
+
+.pub-badge--spotlight    { background: var(--badge-spotlight-bg); color: var(--badge-spotlight-text); border-color: var(--badge-spotlight-bdr); }
+.pub-badge--oral         { background: var(--badge-oral-bg);      color: var(--badge-oral-text);      border-color: var(--badge-oral-bdr); }
+.pub-badge--under-review { background: var(--badge-review-bg);    color: var(--badge-review-text);    border-color: var(--badge-review-bdr); }
+
+/* ── Beyond Research ── */
+#beyond ul { margin-bottom: 1rem; }
+
+/* ── Blog section (on main page) ── */
+.blog-teaser {
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+/* ── Blog listing page ── */
+.blog-post-item {
+    padding-bottom: 1.75rem;
+    margin-bottom: 1.75rem;
+    border-bottom: 1px solid var(--color-border);
+}
+.blog-post-item:last-child { border-bottom: none; }
+
+.blog-post-date {
+    font-size: 0.825rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.2rem;
+}
+
+.blog-post-title {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+    text-decoration: none;
+}
+.blog-post-title:hover { color: var(--color-link); text-decoration: none; }
+
+.blog-post-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 0;
+}
+
+.empty-state {
+    color: var(--color-text-secondary);
+    font-style: italic;
+    margin-top: 1.5rem;
+}
+
+/* ── Blog post page ── */
+.blog-post-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.post-date {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0;
+}
+
+.post-content p { margin-bottom: 1.2rem; }
+
+.post-content h2 { margin-top: 2rem; margin-bottom: 0.75rem; }
+.post-content h3 { margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.1rem; }
+
+.post-content ul,
+.post-content ol { margin-bottom: 1.2rem; }
+
+.post-content blockquote {
+    border-left: 3px solid var(--color-border);
+    padding-left: 1rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    margin: 1.5rem 0;
+}
+
+.post-content code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.85em;
+    background: var(--color-bg-subtle);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+}
+
+.post-content pre {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 1.2rem 1.4rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+.post-content pre code { background: none; padding: 0; color: inherit; font-size: 0.875rem; }
+
+/* ── Footer ── */
+footer {
+    text-align: center;
+    padding: 1.75rem 2rem;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    border-top: 1px solid var(--color-border);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    h1 { font-size: 1.7rem; }
+    main { padding: 2rem 1.25rem 4rem; }
+    nav ul { padding: 0.75rem 1.25rem; gap: 1.25rem; }
+    .social-links { gap: 0.5rem 1.1rem; }
+}

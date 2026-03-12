@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog — Olga Zaghen">
+    <title>Blog — Olga Zaghen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="index.html#beyond">Beyond Research</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section>
+        <h1>Blog</h1>
+        <p class="tagline">Thoughts on research, PhD life, and beyond</p>
+
+        <div id="blog-posts">
+            <!--
+                HOW TO ADD A NEW POST
+                ─────────────────────
+                1. Copy blog/template.html to blog/my-post-title.html
+                2. Fill in the title, date, and content
+                3. Add an entry to the blogPosts array in the <script> below:
+                   {
+                     title:       "Post title",
+                     date:        "YYYY-MM-DD",
+                     description: "A one or two sentence preview.",
+                     url:         "blog/my-post-title.html"
+                   }
+                4. Commit and push — done!
+            -->
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Olga Zaghen &nbsp;·&nbsp; <a href="index.html">← Back to main page</a></p>
+</footer>
+
+<script>
+    /**
+     * Blog posts — add new entries here (newest first).
+     *
+     * {
+     *   title:       "Post title",
+     *   date:        "YYYY-MM-DD",
+     *   description: "Short preview shown in the listing.",
+     *   url:         "blog/filename.html"
+     * }
+     */
+    const blogPosts = [
+        // Example (uncomment and edit when you have a real post):
+        // {
+        //     title:       "My first post",
+        //     date:        "2025-06-01",
+        //     description: "A brief description of what this post is about.",
+        //     url:         "blog/my-first-post.html"
+        // }
+    ];
+
+    const container = document.getElementById('blog-posts');
+
+    if (blogPosts.length === 0) {
+        container.innerHTML = '<p class="empty-state">No posts yet — coming soon!</p>';
+    } else {
+        blogPosts.forEach(post => {
+            const d = new Date(post.date);
+            const dateStr = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            const item = document.createElement('div');
+            item.className = 'blog-post-item';
+            item.innerHTML = `
+                <div class="blog-post-date">${dateStr}</div>
+                <a class="blog-post-title" href="${post.url}">${post.title}</a>
+                <p class="blog-post-desc">${post.description}</p>
+            `;
+            container.appendChild(item);
+        });
+    }
+</script>
+
+</body>
+</html>

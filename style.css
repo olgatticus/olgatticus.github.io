@@ -142,12 +142,13 @@ main {
 
 section { scroll-margin-top: 3.5rem; }
 
-/* ── About — two-column header ── */
+/* ── About header ── */
+
+/* Default (< 1200px): circle sits inline with the name in a flex row */
 .about-header {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 2.25rem;
+    align-items: center;
+    gap: 1.4rem;
     margin-bottom: 1.75rem;
 }
 
@@ -163,18 +164,37 @@ section { scroll-margin-top: 3.5rem; }
 }
 
 /* ── Profile photo ── */
+
+/* Default: compact circle next to the name */
 .profile-photo {
-    width: 160px;
-    height: 200px;
+    width: 90px;
+    height: 90px;
     object-fit: cover;
     object-position: center top;
-    border-radius: 12px;
+    border-radius: 50%;
     border: 3px solid #e8a0b8;
     box-shadow:
         0 4px 16px rgba(180, 70, 110, 0.18),
-        0 0 0 6px rgba(232, 160, 184, 0.18);
+        0 0 0 5px rgba(232, 160, 184, 0.18);
     flex-shrink: 0;
     display: block;
+}
+
+/* Wide screens (≥ 1200px): pull photo out of the page flow
+   and pin it to the right of the content column */
+@media (min-width: 1200px) {
+    .about-header { display: block; }
+
+    .profile-photo {
+        position: fixed;
+        left: calc(50% + 390px);   /* content half-width (370) + 20px gap */
+        top: 5.5rem;               /* just below the sticky nav */
+        width: 145px;
+        height: 183px;
+        border-radius: 14px;
+        border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;  /* soft oval */
+        flex-shrink: unset;
+    }
 }
 
 /* ── Bio box ── */
@@ -276,7 +296,27 @@ section { scroll-margin-top: 3.5rem; }
 
 /* ── Beyond Research ── */
 #beyond > h2 { margin-bottom: 1rem; }
-#beyond ul { margin-bottom: 1rem; }
+
+#beyond ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+}
+
+#beyond ul li {
+    padding-left: 2rem;
+    position: relative;
+    margin-bottom: 0.65rem;
+}
+
+#beyond ul li::before {
+    content: '🌸';
+    position: absolute;
+    left: 0;
+    top: 0.05em;
+    font-size: 0.95em;
+    line-height: 1.75;
+}
 
 /* ── Blog section (main page teaser) ── */
 .blog-teaser {
@@ -387,15 +427,8 @@ footer {
     h1 { font-size: 2.1rem; }
     h2 { font-size: 1.55rem; }
 
-    .about-header {
-        flex-direction: column-reverse;
-        align-items: center;
-        text-align: center;
-        gap: 1.25rem;
-    }
-    .about-header-text { text-align: left; }
-
-    .profile-photo { width: 130px; height: 163px; }
+    .about-header { gap: 1rem; }
+    .profile-photo { width: 76px; height: 76px; }
 
     main { padding: 2rem 1.25rem 4rem; }
     nav ul { padding: 0.75rem 1.25rem; gap: 1.25rem; }

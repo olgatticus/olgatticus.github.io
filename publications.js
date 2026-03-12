@@ -51,7 +51,7 @@ const publications = [
     },
     {
         title: "Revisiting Random Walks for Learning on Graphs",
-        authors: "Jinwoo Kim, <strong>Olga Zaghen</strong>, Ayhan Suleymanzade, Youngmin Ryou, Seunghoon Hong",
+        authors: "Jinwoo Kim, <strong>Olga Zaghen*</strong>, Ayhan Suleymanzade*, Youngmin Ryou, Seunghoon Hong",
         venue: "ICLR 2025",
         url: "https://arxiv.org/abs/2407.01214",
         year: "2024",

@@ -273,7 +273,7 @@
                     equipped with a specific tool $g$ called a <em>Riemannian metric</em> that allows
                     you to measure distances and angles everywhere on it.</dd>
 
-                <dt>Geodesic &nbsp;$\gamma(t)$</dt>
+                <dt>Geodesic &nbsp;$\gamma(\tau)$</dt>
                 <dd>A generalization of a straight line to a curved space, representing the locally
                     shortest, unaccelerated path between two points on a manifold.</dd>
 
@@ -288,11 +288,14 @@
                     via a geodesic.</dd>
             </dl>
 
-            <p>A geodesic can thus be parametrized through the exponential map as:</p>
+            <p> In the following, we will always assume to consider <em>simple manifolds</em>, i.e. with closed
+                form geodesics (geodesics can be parametrized through the exponential map) and such that the
+                geodesic distance between two points can always be expressed through the norm of the logarithm
+                map between them. A geodesic can thus be parametrized through the exponential map as:</p>
 
-            $$\gamma(t) := \exp_x(t \cdot v)$$
+            $$\gamma(\tau) := \exp_x(\tau \cdot v)$$
 
-            <figure style="max-width: 300px;">
+            <figure style="max-width: 350px;">
                 <img src="jacobi-fields/exp-map.png" alt="Visual representation of the exponential map on a manifold">
                 <figcaption>
                     The exponential map on a manifold: a tangent vector $v$ at $x$ is mapped to the point
@@ -301,24 +304,20 @@
             </figure>
 
             <p>
-                In the following, we will always assume to consider <em>simple manifolds</em>, i.e. with closed
-                form geodesics (geodesics can be parametrized through the exponential map) and such that the
-                geodesic distance between two points can always be expressed through the norm of the logarithm
-                map between them.
-            </p>
+                
 
             <h3>B. Jacobi Field Theory</h3>
 
             <p>
-                Intuitively, the <strong>Jacobi field</strong> is a vector field along a geodesic $\gamma(t)$
-                on a Riemannian manifold $\mathcal{M}$ describing the variation between $\gamma(t)$ and other
+                Intuitively, the <strong>Jacobi field</strong> is a vector field along a geodesic $\gamma(\tau)$
+                on a Riemannian manifold $\mathcal{M}$ describing the variation between $\gamma(\tau)$ and other
                 "infinitesimally close geodesics."
             </p>
 
-            <figure style="max-width: 300px;">
+            <figure style="max-width: 350px;">
                 <img src="jacobi-fields/image-1.png" alt="Jacobi fields along a geodesic">
                 <figcaption>
-                    A Jacobi field $J(t)$ measuring the infinitesimal separation between neighboring geodesics.
+                    A Jacobi field $J(\tau)$ measuring the infinitesimal separation between neighboring geodesics.
                 </figcaption>
             </figure>
 
@@ -350,14 +349,16 @@
                 <li>
                     <p>We start building the shooting family of geodesics, fully determined by the
                     starting point and the initial velocities:</p>
-                    <figure>
+                    <figure style="max-width: 350px;">
                         <img src="jacobi-fields/diagram-1.png" alt="Shooting family — initial velocities">
                     </figure>
-                    <div class="fig-row">
-                        <figure><img src="jacobi-fields/diagram-2.png" alt="Family parametrized by s and τ"></figure>
-                        <figure><img src="jacobi-fields/image-2.png" alt="Geodesic family construction"></figure>
-                    </div>
-                    <figure>
+                    <figure style="max-width: 350px;">
+                        <img src="jacobi-fields/diagram-2.png" alt="Family parametrized by s and τ">
+                    </figure>
+                    <figure style="max-width: 350px;">
+                        <img src="jacobi-fields/image-2.png" alt="Geodesic family construction">
+                    </figure>
+                    <figure style="max-width: 350px;">
                         <img src="jacobi-fields/image-3.png" alt="Shooting family of geodesics">
                     </figure>
                 </li>
@@ -586,29 +587,6 @@
   author  = {Zaghen, Olga and others},
   journal = {arXiv preprint arXiv:2502.12981},
   year    = {2025}
-}
-
-@article{chen2023flow,
-  title   = {Flow Matching on General Geometries},
-  author  = {Chen, Ricky TQ and Lipman, Yaron},
-  journal = {arXiv preprint arXiv:2302.03660},
-  year    = {2023}
-}
-
-@article{lipman2022flow,
-  title   = {Flow Matching for Generative Modeling},
-  author  = {Lipman, Yaron and others},
-  journal = {arXiv preprint arXiv:2210.02747},
-  year    = {2022}
-}
-
-@article{eijkelboom2024variational,
-  title   = {Variational Flow Matching for Graph Generation},
-  author  = {Eijkelboom, Floor and others},
-  journal = {Advances in Neural Information Processing Systems},
-  volume  = {37},
-  pages   = {11735--11764},
-  year    = {2024}
 }</div>
             </details>
 

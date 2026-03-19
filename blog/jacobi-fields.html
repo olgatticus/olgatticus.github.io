@@ -116,7 +116,7 @@
         .math-callout p:last-child { margin-bottom: 0; }
 
         /* ── Figures nested inside list items ── */
-        .post-content li > figure { margin: 1.25rem 0; }
+        .post-content li > figure { margin: 1.25rem auto; display: block; }
 
         /* ── Numbered content lists (circled counters) ── */
         .post-content ol:not(.ref-list) {
@@ -253,15 +253,15 @@
             </p>
 
             <ol>
-                <li>What are Jacobi fields?</li>
-                <li>How can they be used in machine learning applications?</li>
-                <li>Example: application to our work.</li>
+                <li><a href="#section-1">What are Jacobi fields?</a></li>
+                <li><a href="#section-2">How can they be used in machine learning applications?</a></li>
+                <li><a href="#section-3">Example: application to our work.</a></li>
             </ol>
 
             <p>Let's dive deep into it!</p>
 
             <!-- ── Section 1 ── -->
-            <h2>1. What are Jacobi Fields?</h2>
+            <h2 id="section-1">1. What are Jacobi Fields?</h2>
 
             <p>Let's start from the basics, with some intuitive definitions of objects in differential geometry.</p>
 
@@ -314,7 +314,7 @@
                 "infinitesimally close geodesics."
             </p>
 
-            <figure style="max-width: 350px;">
+            <figure style="max-width: 450px;">
                 <img src="jacobi-fields/image-1.png" alt="Jacobi fields along a geodesic">
                 <figcaption>
                     A Jacobi field $J(\tau)$ measuring the infinitesimal separation between neighboring geodesics.
@@ -349,16 +349,16 @@
                 <li>
                     <p>We start building the shooting family of geodesics, fully determined by the
                     starting point and the initial velocities:</p>
-                    <figure style="max-width: 350px;">
+                    <figure style="max-width: 500px;">
                         <img src="jacobi-fields/diagram-1.png" alt="Shooting family — initial velocities">
                     </figure>
-                    <figure style="max-width: 350px;">
+                    <figure style="max-width: 500px;">
                         <img src="jacobi-fields/diagram-2.png" alt="Family parametrized by s and τ">
                     </figure>
-                    <figure style="max-width: 350px;">
+                    <figure style="max-width: 500px;">
                         <img src="jacobi-fields/image-2.png" alt="Geodesic family construction">
                     </figure>
-                    <figure style="max-width: 350px;">
+                    <figure style="max-width: 500px;">
                         <img src="jacobi-fields/image-3.png" alt="Shooting family of geodesics">
                     </figure>
                 </li>
@@ -396,7 +396,7 @@
             </div>
 
             <!-- ── Section 2 ── -->
-            <h2>2. Approximation Result and Applications to Machine Learning</h2>
+            <h2 id="section-2">2. Approximation Result and Applications to Machine Learning</h2>
 
             <p>
                 The central result that makes Jacobi fields interesting for machine learning is the relation
@@ -471,7 +471,7 @@
             <p>We illustrate this procedure with the example of our own work in the next section.</p>
 
             <!-- ── Section 3 ── -->
-            <h2>3. Example: Application to Comparing Loss Functions</h2>
+            <h2 id="section-3">3. Example: Application to Comparing Loss Functions</h2>
 
             <p>
                 In this section we carry out the matching and derivation in the specific setting of our

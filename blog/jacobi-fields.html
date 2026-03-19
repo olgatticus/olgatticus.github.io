@@ -27,6 +27,11 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 
     <style>
+        /* ── White background ── */
+        body { background: #ffffff; }
+        nav  { background: rgba(255, 255, 255, 0.95); }
+
+        /* ── Figures ── */
         .post-content figure {
             margin: 2rem auto;
             text-align: center;
@@ -44,8 +49,59 @@
             font-style: italic;
         }
 
+        /* ── Definition list ── */
+        .def-list {
+            margin: 1.25rem 0 1.75rem;
+        }
+        .def-list dt {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-weight: 600;
+            font-style: italic;
+            color: var(--color-text);
+            padding: 0.7rem 1.2rem 0.2rem;
+            border-left: 3px solid var(--color-accent);
+            background: #f8f8f8;
+            margin-top: 0.5rem;
+            border-radius: 0 4px 0 0;
+        }
+        .def-list dd {
+            margin-left: 0;
+            padding: 0.3rem 1.2rem 0.7rem;
+            border-left: 3px solid var(--color-border);
+            background: #f8f8f8;
+            font-size: 0.925rem;
+            line-height: 1.7;
+            border-radius: 0 0 4px 0;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ── Proposition box ── */
+        .proposition {
+            border: 1.5px solid var(--color-accent);
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem 1rem;
+            margin: 2rem 0;
+            background: #fffcfd;
+        }
+        .proposition-label {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            margin-bottom: 0.6rem;
+        }
+        .proposition figure {
+            margin: 0.75rem auto 0 !important;
+            box-shadow: none !important;
+        }
+        .proposition figure img { box-shadow: none !important; }
+
+        /* ── Key-facts callout ── */
         .math-callout {
-            background: var(--color-bg-subtle);
+            background: #fdf5f8;
             border-left: 3px solid var(--color-accent);
             border-radius: 0 8px 8px 0;
             padding: 1.2rem 1.6rem;
@@ -54,6 +110,7 @@
         .math-callout p { margin-bottom: 0.5rem; }
         .math-callout p:last-child { margin-bottom: 0; }
 
+        /* ── Step grid ── */
         .step-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -62,6 +119,37 @@
         }
         .step-grid figure { margin: 0; }
 
+        /* ── Numbered content lists (circled counters) ── */
+        .post-content ol:not(.ref-list) {
+            list-style: none;
+            padding-left: 0;
+            counter-reset: content-counter;
+            margin-bottom: 1.2rem;
+        }
+        .post-content ol:not(.ref-list) > li {
+            counter-increment: content-counter;
+            padding-left: 2.4rem;
+            position: relative;
+            margin-bottom: 0.7rem;
+        }
+        .post-content ol:not(.ref-list) > li::before {
+            content: counter(content-counter);
+            position: absolute;
+            left: 0;
+            top: 0.1em;
+            width: 1.55rem;
+            height: 1.55rem;
+            line-height: 1.55rem;
+            text-align: center;
+            background: var(--color-accent);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.72rem;
+            font-weight: 700;
+            font-family: var(--font-sans);
+        }
+
+        /* ── BibTeX ── */
         .bibtex-block {
             background: #1e1e2e;
             color: #cdd6f4;
@@ -74,7 +162,6 @@
             line-height: 1.6;
             white-space: pre;
         }
-
         details.bibtex-details summary {
             cursor: pointer;
             font-weight: 500;
@@ -95,6 +182,7 @@
             transform: rotate(90deg);
         }
 
+        /* ── Reference list ── */
         .ref-list {
             padding-left: 0;
             list-style: none;
@@ -115,9 +203,6 @@
             color: var(--color-accent);
             font-weight: 600;
         }
-
-        .post-content ol { margin-bottom: 1.2rem; }
-        .post-content ol li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -183,28 +268,26 @@
 
             <h3>A. Basic Definitions in Differential Geometry</h3>
 
-            <p>
-                A <strong>Riemannian manifold</strong> $\mathcal{M}$ is a smooth mathematical space that looks
-                flat up close but can be curved globally, equipped with a specific tool $g$ called a
-                <em>Riemannian metric</em> that allows you to measure distances and angles everywhere on it.
-            </p>
+            <dl class="def-list">
+                <dt>Riemannian manifold &nbsp;$\mathcal{M}$</dt>
+                <dd>A smooth mathematical space that looks flat up close but can be curved globally,
+                    equipped with a specific tool $g$ called a <em>Riemannian metric</em> that allows
+                    you to measure distances and angles everywhere on it.</dd>
 
-            <p>
-                A <strong>geodesic</strong> $\gamma(t)$ is a generalization of a straight line to a curved space,
-                representing the locally shortest, unaccelerated path between two points on a manifold.
-            </p>
+                <dt>Geodesic &nbsp;$\gamma(t)$</dt>
+                <dd>A generalization of a straight line to a curved space, representing the locally
+                    shortest, unaccelerated path between two points on a manifold.</dd>
 
-            <p>
-                The <strong>exponential map</strong> $\exp_x(v)$ takes a tangent vector $v$ at a base point $x$
-                on a manifold and maps it to the point $y$ reached by traveling along the geodesic starting
-                from $x$ with initial velocity $v$.
-            </p>
+                <dt>Exponential map &nbsp;$\exp_x(v)$</dt>
+                <dd>Takes a tangent vector $v$ at a base point $x$ on a manifold and maps it to the
+                    point $y$ reached by traveling along the geodesic starting from $x$ with initial
+                    velocity $v$.</dd>
 
-            <p>
-                The <strong>logarithmic map</strong> $\log_x(y)$ is the local inverse of the exponential map,
-                taking a target point $y$ on the manifold and returning the specific tangent vector $v$ at base
-                point $x$ needed to reach $y$ via a geodesic.
-            </p>
+                <dt>Logarithmic map &nbsp;$\log_x(y)$</dt>
+                <dd>The local inverse of the exponential map: takes a target point $y$ on the manifold
+                    and returns the specific tangent vector $v$ at base point $x$ needed to reach $y$
+                    via a geodesic.</dd>
+            </dl>
 
             <p>A geodesic can thus be parametrized through the exponential map as:</p>
 
@@ -317,17 +400,19 @@
 
             <p>
                 The central result that makes Jacobi fields interesting for machine learning is the relation
-                between $J'(0)$ and $J(1)$, expressed by the following proposition
-                (Proposition 4.2 in [1]; full proof in the paper):
+                between $J'(0)$ and $J(1)$, expressed by the following proposition:
             </p>
 
-            <figure>
-                <img src="jacobi-fields/image-8.png" alt="Approximation result — Proposition 4.2">
-                <figcaption>
-                    Proposition 4.2 from [1]: an approximation relating $J(1)$ to $J'(0)$
-                    up to higher-order curvature terms.
-                </figcaption>
-            </figure>
+            <div class="proposition">
+                <div class="proposition-label">Proposition 4.2 &nbsp;·&nbsp; [1]</div>
+                <figure>
+                    <img src="jacobi-fields/image-8.png" alt="Approximation result — Proposition 4.2">
+                    <figcaption>
+                        An approximation relating $J(1)$ to $J'(0)$ up to higher-order curvature terms.
+                        Full proof in [1].
+                    </figcaption>
+                </figure>
+            </div>
 
             <p>
                 An intuitive proof consists in (1) computing the Taylor expansion of $J(\tau)$ centred at

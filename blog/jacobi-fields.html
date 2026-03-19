@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An intuitive introduction to Jacobi fields and their applications in machine learning on Riemannian manifolds.">
+    <title>Jacobi Fields in Machine Learning — Olga Zaghen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- MathJax for LaTeX rendering -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true,
+                tags: 'ams'
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+    <style>
+        .post-content figure {
+            margin: 2rem auto;
+            text-align: center;
+            max-width: 720px;
+        }
+        .post-content figure img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.10);
+        }
+        .post-content figure figcaption {
+            font-size: 0.825rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.6rem;
+            font-style: italic;
+        }
+
+        .math-callout {
+            background: var(--color-bg-subtle);
+            border-left: 3px solid var(--color-accent);
+            border-radius: 0 8px 8px 0;
+            padding: 1.2rem 1.6rem;
+            margin: 1.75rem 0;
+        }
+        .math-callout p { margin-bottom: 0.5rem; }
+        .math-callout p:last-child { margin-bottom: 0; }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .step-grid figure { margin: 0; }
+
+        .bibtex-block {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 1.2rem 1.4rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0.75rem 0 1.5rem;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        details.bibtex-details summary {
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--color-link);
+            margin-bottom: 0.4rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        details.bibtex-details summary::-webkit-details-marker { display: none; }
+        details.bibtex-details summary::before {
+            content: '▶';
+            font-size: 0.7em;
+            transition: transform 0.15s;
+        }
+        details.bibtex-details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .ref-list {
+            padding-left: 0;
+            list-style: none;
+            counter-reset: ref-counter;
+        }
+        .ref-list li {
+            counter-increment: ref-counter;
+            padding-left: 2.4rem;
+            position: relative;
+            margin-bottom: 0.7rem;
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+        .ref-list li::before {
+            content: '[' counter(ref-counter) ']';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .post-content ol { margin-bottom: 1.2rem; }
+        .post-content ol li { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#publications">Publications</a></li>
+        <li><a href="../index.html#beyond">Beyond Research</a></li>
+        <li><a href="../blog.html" class="active">Blog</a></li>
+    </ul>
+</nav>
+
+<main>
+    <article>
+        <header class="blog-post-header">
+            <h1>Jacobi Fields in Machine Learning</h1>
+            <p class="post-date">March 19, 2026</p>
+        </header>
+
+        <div class="post-content">
+
+            <p>
+                The goal of this blogpost is providing an intuitive definition of <strong>Jacobi fields</strong>,
+                an object from differential geometry, and how they can be useful for machine learning on manifolds.
+                Specifically, they will be particularly useful if you are trying to determine a relation between
+                the difference of two vectors $v_1$ and $v_2$ in a tangent space $T_p\mathcal{M}$ to a manifold
+                (or a power of it), and the geodesic distance between end-points of geodesics with those vectors
+                as initial velocities.
+            </p>
+
+            <figure>
+                <img src="jacobi-fields/image-0.png" alt="Jacobi fields — concept illustration">
+            </figure>
+
+            <p>
+                The content of this blogpost is based on our paper
+                <em>Riemannian Variational Flow Matching for Material and Protein Design</em> [1],
+                where we use this concept to relate our objective function (geodesic distance between endpoints)
+                to the objective of Riemannian Flow Matching [2]. We recommend checking out
+                <a href="https://arxiv.org/abs/2502.12981" target="_blank">our paper</a>
+                for more detailed explorations and proofs, and our code for playing around with these concepts.
+            </p>
+
+            <p>
+                My hope is that, by providing an accessible introduction to Jacobi fields and their applications
+                through this blogpost, their usefulness will find more applications in future works involving
+                vectors and points on curved manifolds. This post will answer the following questions in order:
+            </p>
+
+            <ol>
+                <li>What are Jacobi fields?</li>
+                <li>How can they be used in machine learning applications?</li>
+                <li>Example: application to our work.</li>
+            </ol>
+
+            <p>Let's dive deep into it!</p>
+
+            <!-- ── Section 1 ── -->
+            <h2>1. What are Jacobi Fields?</h2>
+
+            <p>Let's start from the basics, with some intuitive definitions of objects in differential geometry.</p>
+
+            <h3>A. Basic Definitions in Differential Geometry</h3>
+
+            <p>
+                A <strong>Riemannian manifold</strong> $\mathcal{M}$ is a smooth mathematical space that looks
+                flat up close but can be curved globally, equipped with a specific tool $g$ called a
+                <em>Riemannian metric</em> that allows you to measure distances and angles everywhere on it.
+            </p>
+
+            <p>
+                A <strong>geodesic</strong> $\gamma(t)$ is a generalization of a straight line to a curved space,
+                representing the locally shortest, unaccelerated path between two points on a manifold.
+            </p>
+
+            <p>
+                The <strong>exponential map</strong> $\exp_x(v)$ takes a tangent vector $v$ at a base point $x$
+                on a manifold and maps it to the point $y$ reached by traveling along the geodesic starting
+                from $x$ with initial velocity $v$.
+            </p>
+
+            <p>
+                The <strong>logarithmic map</strong> $\log_x(y)$ is the local inverse of the exponential map,
+                taking a target point $y$ on the manifold and returning the specific tangent vector $v$ at base
+                point $x$ needed to reach $y$ via a geodesic.
+            </p>
+
+            <p>A geodesic can thus be parametrized through the exponential map as:</p>
+
+            $$\gamma(t) := \exp_x(t \cdot v)$$
+
+            <figure>
+                <img src="jacobi-fields/exp-map.png" alt="Visual representation of the exponential map on a manifold">
+                <figcaption>
+                    The exponential map on a manifold: a tangent vector $v$ at $x$ is mapped to the point
+                    reached by following the geodesic with initial velocity $v$.
+                </figcaption>
+            </figure>
+
+            <p>
+                In the following, we will always assume to consider <em>simple manifolds</em>, i.e. with closed
+                form geodesics (geodesics can be parametrized through the exponential map) and such that the
+                geodesic distance between two points can always be expressed through the norm of the logarithm
+                map between them.
+            </p>
+
+            <h3>B. Jacobi Field Theory</h3>
+
+            <p>
+                Intuitively, the <strong>Jacobi field</strong> is a vector field along a geodesic $\gamma(t)$
+                on a Riemannian manifold $\mathcal{M}$ describing the variation between $\gamma(t)$ and other
+                "infinitesimally close geodesics."
+            </p>
+
+            <figure>
+                <img src="jacobi-fields/image-1.png" alt="Jacobi fields along a geodesic">
+                <figcaption>
+                    A Jacobi field $J(t)$ measuring the infinitesimal separation between neighboring geodesics.
+                </figcaption>
+            </figure>
+
+            <p>
+                In our setting, we consider a <strong>shooting family of geodesics</strong>
+                $\{\gamma_s\}$, all starting from the same point $\gamma_s(0) := x_0 \in \mathcal{M}$,
+                determined by an initial velocity of the form:
+            </p>
+
+            $$\dot{\gamma}_s(0) = v^s := v^0 + s\, w, \quad v^0, w \in T_{x_0}\mathcal{M}$$
+
+            <p>
+                where $sw$ represents the perturbation level. This family of geodesics can be parametrized as:
+            </p>
+
+            $$\alpha(s, \tau) := \gamma_s \colon \tau \mapsto \exp_{x_0}\!\bigl(\tau\,(v + sw)\bigr)$$
+
+            <p>
+                with $s \in [0,1]$ and $\tau \in [0,1]$. The <strong>Jacobi field</strong> is defined at each
+                timestep $\tau \in [0,1]$ as the vector field obtained by differentiating with respect to the
+                parameter $s$ and evaluated at $s=0$. Intuitively, this corresponds to measuring the
+                perturbation of geodesics in the family with respect to the "reference geodesic"
+                corresponding to $s = 0$.
+            </p>
+
+            <p>Let's go through the construction step by step:</p>
+
+            <figure>
+                <img src="jacobi-fields/diagram-1.png" alt="Shooting family of geodesics — construction">
+                <figcaption>
+                    Building the shooting family of geodesics, fully determined by the starting point
+                    $x_0$ and the initial velocities $v^s = v^0 + sw$.
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="jacobi-fields/diagram-2.png" alt="Parametric surface of geodesics">
+                <figcaption>
+                    The resulting family of geodesics parametrized by the time parameter $\tau$
+                    and the variation parameter $s$.
+                </figcaption>
+            </figure>
+
+            <div class="step-grid">
+                <figure><img src="jacobi-fields/image-2.png" alt="Jacobi field derivation — step 1"></figure>
+                <figure><img src="jacobi-fields/image-3.png" alt="Jacobi field derivation — step 2"></figure>
+                <figure><img src="jacobi-fields/image-4.png" alt="Jacobi field derivation — step 3"></figure>
+                <figure><img src="jacobi-fields/image-5.png" alt="Jacobi field derivation — step 4"></figure>
+                <figure><img src="jacobi-fields/image-6.png" alt="Jacobi field derivation — step 5"></figure>
+                <figure><img src="jacobi-fields/image-7.png" alt="Jacobi field derivation — step 6"></figure>
+            </div>
+
+            <p>
+                Interestingly, the norm of $J(1)$ equals the geodesic distance between the endpoints
+                of geodesics $\gamma_0$ and $\gamma_1$:
+            </p>
+
+            $$J(1) = \log_{\gamma_0(1)}\!\bigl(\gamma_1(1)\bigr)$$
+
+            <p>hence:</p>
+
+            $$\|J(1)\| = g\bigl(\gamma_0(1),\, \gamma_1(1)\bigr)$$
+
+            <div class="math-callout">
+                <p>Two key facts to keep in mind:</p>
+                <p>$$J'(0) = w$$</p>
+                <p>
+                    The relation between $J'(0)$ (the initial derivative of the Jacobi field) and $J(1)$
+                    (its value at the endpoint) is the central object of interest. In flat Euclidean space
+                    these are trivially related, because all tangent spaces coincide and geodesics are
+                    straight lines. On a curved manifold, however, they differ — making it difficult to
+                    establish an explicit analytical relationship between them.
+                </p>
+            </div>
+
+            <!-- ── Section 2 ── -->
+            <h2>2. Approximation Result and Applications to Machine Learning</h2>
+
+            <p>
+                The central result that makes Jacobi fields interesting for machine learning is the relation
+                between $J'(0)$ and $J(1)$, expressed by the following proposition
+                (Proposition 4.2 in [1]; full proof in the paper):
+            </p>
+
+            <figure>
+                <img src="jacobi-fields/image-8.png" alt="Approximation result — Proposition 4.2">
+                <figcaption>
+                    Proposition 4.2 from [1]: an approximation relating $J(1)$ to $J'(0)$
+                    up to higher-order curvature terms.
+                </figcaption>
+            </figure>
+
+            <p>
+                An intuitive proof consists in (1) computing the Taylor expansion of $J(\tau)$ centred at
+                $\tau = 0$ and evaluated at $\tau = 1$, then (2) identifying $J'(0)$ as the linear term
+                of such expansion.
+            </p>
+
+            <figure>
+                <img src="jacobi-fields/image-9.png" alt="Why Jacobi fields matter in ML">
+            </figure>
+
+            <p>
+                In machine learning applications, MSE losses often involve minimizing the distance between
+                two vectors or two points. In Euclidean space there is no conceptual difference between
+                the two, because the space is flat, geodesics are straight lines, and the tangent space
+                is the same at every point. Denoting the Euclidean distance by $d_e$:
+            </p>
+
+            <figure>
+                <img src="jacobi-fields/image-10.png" alt="Equivalence in Euclidean space vs curved space">
+                <figcaption>
+                    In Euclidean space, minimizing the distance between vectors is equivalent to
+                    minimizing the distance between the corresponding endpoints.
+                    This equivalence breaks down on curved manifolds.
+                </figcaption>
+            </figure>
+
+            <p>
+                For people familiar with flow matching-based models, this property is what allows one to
+                freely switch between predicting velocities and predicting end-points when learning a
+                Flow Matching model, since the latter may offer practical advantages without any
+                analytical differences in flat space.
+            </p>
+
+            <p>
+                The issue arises on <strong>curved spaces</strong>: with non-zero curvature, the trivial
+                equivalence between minimizing vector differences and endpoint distances no longer holds.
+                This is precisely where our Proposition comes in: although there is no equivalence, we
+                at least have an analytical understanding of their relation.
+            </p>
+
+            <p>In practice, applying the approximation result to a machine learning setting involves two steps:</p>
+
+            <ol>
+                <li>
+                    <strong>Matching:</strong> Identify how the machine learning objects correspond to
+                    the Jacobi field elements.
+                </li>
+                <li>
+                    <strong>Derivation:</strong> Derive an explicit analytic connection between the
+                    machine learning objects, exploiting the Approximation result from step 1.
+                </li>
+            </ol>
+
+            <p>We illustrate this procedure with the example of our own work in the next section.</p>
+
+            <!-- ── Section 3 ── -->
+            <h2>3. Example: Application to Comparing Loss Functions</h2>
+
+            <p>
+                In this section we carry out the matching and derivation in the specific setting of our
+                paper [1]. We are interested in exploring the connection between our objective
+                $\mathcal{L}_{\mathrm{RG\text{-}VFM}}$ and the Riemannian Flow Matching objective [2]
+                $\mathcal{L}_{\mathrm{RFM}}$.
+            </p>
+
+            <p>
+                The key conceptual difference between the two losses is that <strong>RFM</strong> minimizes
+                the squared distance between two tangent velocities at a point on the manifold, while
+                <strong>RG-VFM</strong> minimizes the squared geodesic distance between two points on the
+                manifold — the endpoints of two geodesics that have such vectors as initial velocities.
+                With this intuition, you may already see how the Jacobi field perspective comes into play.
+            </p>
+
+            <p>Concretely, we identify:</p>
+
+            $$\mathcal{L}_{\mathrm{RFM}}(\theta)
+              = \mathbb{E}_{t,x_1,x}\!\left[\left\|u_{t}(x \mid x_1) - v_{t}^\theta(x)\right\|_{\mathbf{g}}^2\right]
+              = \mathbb{E}_{t,x_1,x}\!\left[\left\|D_\tau J(0)\right\|_{\mathbf{g}}^2\right]$$
+
+            $$\mathcal{L}_{\mathrm{RG\text{-}VFM}}(\theta)
+              = \mathbb{E}_{t,x_1,x}\!\left[\left\|\log_{x_1}\!\bigl(\mu_t^{\theta}(x)\bigr)\right\|_{\mathbf{g}}^2\right]
+              = \mathbb{E}_{t,x_1,x}\!\left[\left\|J(1)\right\|_{\mathbf{g}}^2\right]$$
+
+            <p>
+                Once the connection is drawn, the last step is to exploit the approximation result to relate
+                the two losses. The difference between the loss values and the Jacobi field quantities
+                $J(1)$ and $J'(0)$ involves taking the squared norm, which affects the derivation —
+                summarized in the figure below:
+            </p>
+
+            <figure>
+                <img src="jacobi-fields/image-11.png" alt="Comparison of loss functions and curvature effects">
+                <figcaption>
+                    The curvature functional $\mathcal{C}$ captures how the manifold's geometry affects the
+                    loss comparison, encoding first- and second-order effects of curvature on geodesic deviation.
+                </figcaption>
+            </figure>
+
+            <p>
+                The <strong>curvature functional</strong> $\mathcal{C}$ encodes the first- and second-order
+                effects of curvature on geodesic deviation. Thus, RG-VFM <em>implicitly</em> captures the
+                full geometric structure through the exact Jacobi field $J(1)$, while RFM uses only the
+                linear approximation $J'(0)$.
+            </p>
+
+            <p>
+                In summary, we introduced RG-VFM as an alternative to RFM for learning a velocity field
+                on a manifold, providing a variational formulation whose objective fully captures
+                higher-order curvature effects, unlike RFM. This results in generally different objectives
+                on curved manifolds. In Euclidean space, however, the RFM objective reduces to CFM [3],
+                while RG-VFM reduces to VFM [4] — and these two become equivalent under appropriate
+                normalization.
+            </p>
+
+            <p>
+                In conclusion, we believe that the Approximation result could be useful in practice to
+                analytically relate quantities that are trivially connected in Euclidean space but whose
+                relationship would otherwise be obscure on curved manifolds. This could be done by
+                properly adapting the Matching and Derivation procedure to different settings of interest,
+                and we hope that this short introduction makes these concepts accessible and inspires
+                further applications in machine learning.
+            </p>
+
+            <hr>
+
+            <!-- ── References ── -->
+            <h2>References</h2>
+
+            <ol class="ref-list">
+                <li>
+                    Zaghen, Olga, et al. "Riemannian Variational Flow Matching for Material and Protein Design."
+                    <em>arXiv preprint arXiv:2502.12981</em> (2025).
+                </li>
+                <li>
+                    Chen, Ricky TQ, and Yaron Lipman. "Flow Matching on General Geometries."
+                    <em>arXiv preprint arXiv:2302.03660</em> (2023).
+                </li>
+                <li>
+                    Lipman, Yaron, et al. "Flow Matching for Generative Modeling."
+                    <em>arXiv preprint arXiv:2210.02747</em> (2022).
+                </li>
+                <li>
+                    Eijkelboom, Floor, et al. "Variational Flow Matching for Graph Generation."
+                    <em>Advances in Neural Information Processing Systems</em> 37 (2024): 11735–11764.
+                </li>
+            </ol>
+
+            <!-- ── Citation ── -->
+            <h2>Citation</h2>
+
+            <p>If you found this blogpost and/or our work useful for your research, please consider citing us! :)</p>
+
+            <details class="bibtex-details">
+                <summary>BibTeX</summary>
+                <div class="bibtex-block">@article{zaghen2025riemannian,
+  title   = {Riemannian Variational Flow Matching for Material and Protein Design},
+  author  = {Zaghen, Olga and others},
+  journal = {arXiv preprint arXiv:2502.12981},
+  year    = {2025}
+}
+
+@article{chen2023flow,
+  title   = {Flow Matching on General Geometries},
+  author  = {Chen, Ricky TQ and Lipman, Yaron},
+  journal = {arXiv preprint arXiv:2302.03660},
+  year    = {2023}
+}
+
+@article{lipman2022flow,
+  title   = {Flow Matching for Generative Modeling},
+  author  = {Lipman, Yaron and others},
+  journal = {arXiv preprint arXiv:2210.02747},
+  year    = {2022}
+}
+
+@article{eijkelboom2024variational,
+  title   = {Variational Flow Matching for Graph Generation},
+  author  = {Eijkelboom, Floor and others},
+  journal = {Advances in Neural Information Processing Systems},
+  volume  = {37},
+  pages   = {11735--11764},
+  year    = {2024}
+}</div>
+            </details>
+
+        </div>
+    </article>
+</main>
+
+<footer>
+    <p>© 2025 Olga Zaghen &nbsp;·&nbsp; <a href="../blog.html">← Back to Blog</a></p>
+</footer>
+
+</body>
+</html>

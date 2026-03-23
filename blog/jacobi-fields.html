@@ -219,15 +219,15 @@
     <article>
         <header class="blog-post-header">
             <h1>Jacobi Fields in Machine Learning</h1>
-            <p class="post-date">March 19, 2026</p>
+            <p class="post-date">March 19, 2026 &nbsp;·&nbsp; 10 min read</p>
         </header>
 
         <div class="post-content">
 
             <p>
-                The goal of this blogpost is providing an intuitive definition of <strong>Jacobi fields</strong>,
+                The goal of this blogpost is to provide an intuitive definition of <strong>Jacobi fields</strong>,
                 an object from differential geometry, and how they can be useful for machine learning on manifolds.
-                Specifically, they will be particularly useful if you are trying to determine a relation between
+                They are particularly useful if you are trying to determine a relation between
                 the difference of two vectors $v_1$ and $v_2$ in a tangent space $T_p\mathcal{M}$ to a manifold
                 (or a power of it), and the geodesic distance between end-points of geodesics with those vectors
                 as initial velocities.
@@ -288,10 +288,11 @@
                     via a geodesic.</dd>
             </dl>
 
-            <p> In the following, we will always assume to consider <em>simple manifolds</em>, i.e. with closed
-                form geodesics (geodesics can be parametrized through the exponential map) and such that the
-                geodesic distance between two points can always be expressed through the norm of the logarithm
+            <p> In the following, we will always assume we are working with <em>simple manifolds</em>, i.e. with closed-form
+                geodesics (geodesics can be parametrized through the exponential map) and such that the
+                geodesic distance between two points can always be expressed through the norm of the logarithmic
                 map between them. A geodesic can thus be parametrized through the exponential map as $\gamma(\tau) := \exp_x(\tau \cdot v)$.
+            </p>
 
             <figure style="max-width: 350px;">
                 <img src="jacobi-fields/exp-map.png" alt="Visual representation of the exponential map on a manifold">
@@ -300,9 +301,6 @@
                     reached by following the geodesic with initial velocity $v$.
                 </figcaption>
             </figure>
-
-            <p>
-                
 
             <h3>B. Jacobi Field Theory</h3>
 
@@ -350,11 +348,11 @@
                     <figure style="max-width: 600px;">
                         <img src="jacobi-fields/diagram-1.png" alt="Shooting family — initial velocities">
                     </figure>
-                    The time parameter $\tau$ traverses the geodesics from their starting common point $x_0$ at $\tau = 0$ to their endpoints at $\tau = 1$.
+                    The time parameter $\tau$ traverses the geodesics from their common starting point $x_0$ at $\tau = 0$ to their endpoints at $\tau = 1$.
                     <figure style="max-width: 600px;">
                         <img src="jacobi-fields/diagram-2.png" alt="Family parametrized by s and τ">
                     </figure>
-                    We can also visualize the effect of varying the parameter $s$, that corresponds to different geodesics in the family.
+                    We can also visualize the effect of varying the parameter $s$, which corresponds to different geodesics in the family.
                     <figure style="max-width: 600px;">
                         <img src="jacobi-fields/image-2.png" alt="Geodesic family construction">
                     </figure>
@@ -363,7 +361,7 @@
                     </figure>
                 </li>
                 <li>
-                    <p>At this point, we can derive the Jacobi field by differentiating such family
+                    <p>We now derive the Jacobi field by differentiating such a family
                     with respect to $s$:</p>
                     <figure style="max-width: 600px;"><img src="jacobi-fields/image-4.png" alt="Jacobi field derivation — step 1"></figure>
                     <div class="math-callout">
@@ -419,7 +417,7 @@
             </ol>
 
             <p>
-                At this point, a natural question you may still have in mind is: <strong>but why</strong>? Why would these notions be useful in practice? Let's explore a practical example.
+                A natural question you may still have in mind is: <strong>but why</strong>? Why would these notions be useful in practice? Let's explore a practical example.
             </p>
 
 
@@ -445,7 +443,7 @@
 
             <p>
                 For people familiar with flow matching-based models, this property is what allows one to
-                freely switch between predicting velocities and predicting end-points when learning a
+                freely switch between predicting velocities and predicting endpoints when learning a
                 Flow Matching model, since the latter may offer practical advantages without any
                 analytical differences in flat space.
             </p>

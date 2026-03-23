@@ -249,13 +249,13 @@
             <p>
                 My hope is that, by providing an accessible introduction to Jacobi fields and their applications
                 through this blogpost, their usefulness will find more applications in future works involving
-                vectors and points on curved manifolds. This post will answer the following questions in order:
+                vectors and points on curved manifolds. This post will answer the following questions in three subsequent sections:
             </p>
 
             <ol>
                 <li><a href="#section-1">What are Jacobi fields?</a></li>
                 <li><a href="#section-2">How can they be used in machine learning applications?</a></li>
-                <li><a href="#section-3">Example: application to our work.</a></li>
+                <li><a href="#section-3">Example: application to comparing RG-VFM and RFM losses.</a></li>
             </ol>
 
             <p>Let's dive deep into it!</p>
@@ -350,9 +350,11 @@
                     <figure style="max-width: 600px;">
                         <img src="jacobi-fields/diagram-1.png" alt="Shooting family — initial velocities">
                     </figure>
+                    The time parameter $\tau$ traverses the geodesics from their starting common point $x_0$ at $\tau = 0$ to their endpoints at $\tau = 1$.
                     <figure style="max-width: 600px;">
                         <img src="jacobi-fields/diagram-2.png" alt="Family parametrized by s and τ">
                     </figure>
+                    We can also visualize the effect of varying the parameter $s$, that corresponds to different geodesics in the family.
                     <figure style="max-width: 600px;">
                         <img src="jacobi-fields/image-2.png" alt="Geodesic family construction">
                     </figure>
@@ -364,6 +366,13 @@
                     <p>At this point, we can derive the Jacobi field by differentiating such family
                     with respect to $s$:</p>
                     <figure style="max-width: 600px;"><img src="jacobi-fields/image-4.png" alt="Jacobi field derivation — step 1"></figure>
+                    <div class="math-callout">
+                        <p>
+                            Two essential observations to make at this point, which are fully proved in [1], are that (1) $J'(0) = w$, and (2) the norm of $J(1)$ equals the geodesic distance between the endpoints
+                            of geodesics $\gamma_0$ and $\gamma_1$: $J(1) = \log_{\gamma_0(1)}\!\bigl(\gamma_1(1)\bigr)$, hence $\|J(1)\| = g\bigl(\gamma_0(1),\, \gamma_1(1)\bigr)$.
+                            This property will be exploited in the following, by interchangeably considering $\|J(1)\|$ and $g\bigl(\gamma_0(1),\, \gamma_1(1)\bigr)$.
+                        </p>
+                    </div>
                     <figure style="max-width: 600px;"><img src="jacobi-fields/image-5.png" alt="Jacobi field derivation — step 2"></figure>
                     <figure style="max-width: 600px;"><img src="jacobi-fields/image-6.png" alt="Jacobi field derivation — step 3"></figure>
                     <figure style="max-width: 600px;"><img src="jacobi-fields/image-7.png" alt="Jacobi field derivation — step 4"></figure>
@@ -371,27 +380,12 @@
             </ol>
 
             <p>
-                Interestingly, the norm of $J(1)$ equals the geodesic distance between the endpoints
-                of geodesics $\gamma_0$ and $\gamma_1$:
+                The relation between $J'(0)$ (the initial derivative of the Jacobi field) and $J(1)$
+                (its value at the endpoint) is the central object of interest. In flat Euclidean space
+                these are trivially related, because all tangent spaces coincide and geodesics are
+                straight lines. On a curved manifold, however, they differ — making it difficult to
+                establish an explicit analytical relationship between them.
             </p>
-
-            $$J(1) = \log_{\gamma_0(1)}\!\bigl(\gamma_1(1)\bigr)$$
-
-            <p>hence:</p>
-
-            $$\|J(1)\| = g\bigl(\gamma_0(1),\, \gamma_1(1)\bigr)$$
-
-            <div class="math-callout">
-                <p>Two key facts to keep in mind:</p>
-                <p>$$J'(0) = w$$</p>
-                <p>
-                    The relation between $J'(0)$ (the initial derivative of the Jacobi field) and $J(1)$
-                    (its value at the endpoint) is the central object of interest. In flat Euclidean space
-                    these are trivially related, because all tangent spaces coincide and geodesics are
-                    straight lines. On a curved manifold, however, they differ — making it difficult to
-                    establish an explicit analytical relationship between them.
-                </p>
-            </div>
 
             <!-- ── Section 2 ── -->
             <h2 id="section-2">2. Approximation Result and Applications to Machine Learning</h2>
@@ -407,20 +401,24 @@
                 <figure style="max-width: 600px;">
                     <img src="jacobi-fields/image-8.png" alt="Approximation result — Proposition 1">
                     <figcaption>
-                        An approximation relating $J(1)$ to $J'(0)$ up to higher-order curvature terms.
-                        Full proof in [1].
+                        $J'(0)$ approximates $J(1)$ up to higher-order curvature terms.
                     </figcaption>
                 </figure>
             </div>
 
             <p>
-                An intuitive proof consists in (1) computing the Taylor expansion of $J(\tau)$ centred at
+                The full proof of the Proposition is in [1], and intuitively it consists in (1) computing the Taylor expansion of $J(\tau)$ centred at
                 $\tau = 0$ and evaluated at $\tau = 1$, then (2) identifying $J'(0)$ as the linear term
                 of such expansion.
             </p>
 
-            <figure style="max-width: 250px;">
-                <img src="jacobi-fields/image-9.png" alt="Why Jacobi fields matter in ML" style="border-radius: 20px;">
+            <p>
+                At this point, a natural question you may still have in mind is: </strong>but why</strong>? Why would these notions be useful in practice? Let's explore a practical example.
+            </p>
+
+
+            <figure style="max-width: 230px;">
+                <img src="jacobi-fields/image-9.png" alt="Why Jacobi fields matter in ML" style="border-radius: 25px;">
             </figure>
 
             <p>
@@ -469,7 +467,7 @@
             <p>We illustrate this procedure with the example of our own work in the next section.</p>
 
             <!-- ── Section 3 ── -->
-            <h2 id="section-3">3. Example: Application to Comparing Loss Functions</h2>
+            <h2 id="section-3">3. Example: Application to Comparing RG-VFM and RFM Losses</h2>
 
             <p>
                 In this section we carry out the matching and derivation in the specific setting of our

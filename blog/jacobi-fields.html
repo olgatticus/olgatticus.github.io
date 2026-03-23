@@ -494,7 +494,7 @@
                 the following equalities hold for the RFM and RG-VFM losses:</p>
                 $$\mathcal{L}_{\mathrm{RFM}}(\theta)
                   = \mathbb{E}_{t,x_1,x}\!\left[\left\|u_{t}(x \mid x_1) - v_{t}^\theta(x)\right\|_{\mathbf{g}}^2\right]
-                  = \mathbb{E}_{t,x_1,x}\!\left[\left\|D_\tau J(0)\right\|_{\mathbf{g}}^2\right]$$
+                  = \mathbb{E}_{t,x_1,x}\!\left[\left\|J'(0)\right\|_{\mathbf{g}}^2\right]$$
                 $$\mathcal{L}_{\mathrm{RG\text{-}VFM}}(\theta)
                   = \mathbb{E}_{t,x_1,x}\!\left[\left\|\log_{x_1}\!\bigl(\mu_t^{\theta}(x)\bigr)\right\|_{\mathbf{g}}^2\right]
                   = \mathbb{E}_{t,x_1,x}\!\left[\left\|J(1)\right\|_{\mathbf{g}}^2\right]$$
@@ -512,21 +512,20 @@
                 the difference between $\mathcal{L}_{\mathrm{RG\text{-}VFM}}$ and
                 $\mathcal{L}_{\mathrm{RFM}}$ encodes the manifold curvature through:</p>
                 $$\mathcal{L}_{\mathrm{RG\text{-}VFM}}(\theta) = \mathcal{L}_{\mathrm{RFM}}(\theta)
-                  + \underbrace{\mathbb{E}_{t,x_1,x}\!\bigl[\mathcal{C}(R,\, D_\tau J(0),\, v)
+                  + \underbrace{\mathbb{E}_{t,x_1,x}\!\bigl[\mathcal{C}(R,\, J'(0),\, v)
                   + \mathcal{E}_{\mathrm{higher}}\bigr]}_{\text{curvature-dependent term}}$$
             </div>
 
             <figure style="max-width: 600px;">
                 <img src="jacobi-fields/image-11.png" alt="Comparison of loss functions and curvature effects">
                 <figcaption>
-                    The curvature functional $\mathcal{C}$ captures how the manifold's geometry affects the
-                    loss comparison, encoding first- and second-order effects of curvature on geodesic deviation.
+                    Schematization of how the RG-VFM and RFM losses fall into the Jacobi fields perspective.
                 </figcaption>
             </figure>
 
             <p>
-                The <strong>curvature functional</strong> $\mathcal{C}$ encodes the first- and second-order
-                effects of curvature on geodesic deviation. Thus, RG-VFM <em>implicitly</em> captures the
+                The <strong>curvature functional</strong> $\mathcal{C}$ captures how the manifold's geometry affects the
+                loss comparison, encoding first- and second-order effects of curvature on geodesic deviation. Thus, RG-VFM <em>implicitly</em> captures the
                 full geometric structure through the exact Jacobi field $J(1)$, while RFM uses only the
                 linear approximation $J'(0)$.
             </p>
@@ -547,7 +546,7 @@
                 In conclusion, we believe that the Approximation result could be useful in practice to
                 analytically relate quantities that are trivially connected in Euclidean space but whose
                 relationship would otherwise be obscure on curved manifolds. This could be done by
-                properly adapting the Matching and Derivation procedure to different settings of interest,
+                properly adapting the matching and derivation procedure to different settings of interest,
                 and we hope that this short introduction makes these concepts accessible and inspires
                 further applications in machine learning.
             </p>

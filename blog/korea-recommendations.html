@@ -76,6 +76,44 @@
             padding-left: 1.2rem;
         }
         .toc li { margin-bottom: 0.3rem; }
+
+        /* ── Figures ── */
+        .post-content figure {
+            margin: 1.8rem auto;
+            text-align: center;
+        }
+        .post-content figure img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(180, 70, 110, 0.10);
+            display: block;
+            margin: 0 auto;
+        }
+        .post-content figure figcaption {
+            font-size: 0.82rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.6rem;
+            font-style: italic;
+        }
+        .fig-row {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin: 1.8rem 0;
+        }
+        .fig-row figure { flex: 1; margin: 0; }
+        @media (max-width: 600px) {
+            .fig-row { flex-direction: column; }
+        }
+
+        /* ── Decorative kaomoji ── */
+        .kaomoji {
+            text-align: center;
+            color: var(--color-accent);
+            font-size: 1.1rem;
+            margin: 0.5rem 0 1rem;
+            letter-spacing: 0.05em;
+        }
     </style>
 </head>
 <body>
@@ -141,7 +179,7 @@
                     (<span class="kr">친구모바일</span>).
                 </li>
                 <li>
-                    <strong>Some cash</strong>, particularly useful if you're planning to visit markets. Although you will be able to pay with card in most places outside markets.
+                    <strong>Some cash</strong>, particularly useful if you're planning to visit markets, although you'll be able to pay by card almost everywhere else.
                 </li>
             </ul>
 
@@ -154,7 +192,10 @@
             </p>
             <ul>
                 <li>
-                    <strong>Maps:</strong> use <strong>Naver Maps</strong> or <strong>Kakao Maps</strong>. I personally always used NaverMaps, and found it extremely convenient. It directly tells you how to move around the cities, with suggested route, public transport and corresponding costs, exaclty as Google Maps would do.
+                    <strong>Maps:</strong> use <strong>Naver Maps</strong> or <strong>Kakao Maps</strong>.
+                    I personally always used Naver Maps and found it extremely convenient: it gives you
+                    routes, public transport options, and corresponding costs, exactly like Google Maps
+                    would.
                 </li>
                 <li>
                     <strong>Taxi:</strong> while Uber works, I recommend <strong>Kakao T</strong>
@@ -175,12 +216,10 @@
                 to learn:
             </p>
             <ul>
-                <li><em>Annyeonghaseyo</em> (<span class="kr">안녕하세요</span>), hello</li>
-                <li><em>Kamsahamnida</em> (<span class="kr">감사합니다</span>), thank you</li>
-                ≽^• ˕ • ྀི≼
+                <li><em>Annyeonghaseyo</em> (<span class="kr">안녕하세요</span>), hello.</li>
+                <li><em>Kamsahamnida</em> (<span class="kr">감사합니다</span>), thank you.</li>
             </ul>
-
-    
+            <p class="kaomoji">≽^• ˕ • ྀི≼</p>
 
             <!-- ── Section 2 ── -->
             <h2 id="section-2">2. General Recommendations</h2>
@@ -224,9 +263,13 @@
                     <a href="https://map.naver.com/p/entry/place/1777390319?c=15.00,0,0,0,dh" target="_blank">Naver Maps link</a>.
                 </li>
                 <li>
-                    <strong>Tteokbokki as a main dish:</strong>
+                    <strong>For many tasty variations of tteokbokki:</strong>
                     <a href="https://koreabyme.com/dukki-tteokbokki-heaven/" target="_blank">Dukki</a>
                     (<span class="kr">두끼</span>), multiple locations.
+                </li>
+                <li>
+                    <strong>Best vegan restaurant in Itaewon:</strong>
+                    <a href="https://share.google/vbhLKkb46RFiBCCY8" target="_blank">map link</a>.
                 </li>
                 <li>
                     <strong>Myeongdong</strong> (<span class="kr">명동</span>) shopping street,
@@ -275,8 +318,7 @@
             <h3>Cultural etiquette</h3>
             <p>
                 Koreans are extremely respectful of public spaces. Please reciprocate: avoid loud noises
-                on public transport, leave reserved seats free for the people they're meant for, and
-                generally try to blend in with the calm atmosphere.
+                on public transport, leave reserved seats free for the people they're meant for.
             </p>
 
             <h3>Must-do activities</h3>
@@ -327,6 +369,17 @@
                 (<span class="kr">서울숲</span>), a beautiful park well worth a visit.
             </p>
 
+            <div class="fig-row">
+                <figure>
+                    <img src="itaewon.jpg" alt="A street scene from Itaewon">
+                    <figcaption>A glimpse of Itaewon (이태원) from one of my walks.</figcaption>
+                </figure>
+                <figure>
+                    <img src="seongsu.jpg" alt="A street scene from Seongsu">
+                    <figcaption>A glimpse of Seongsu (성수) from one of my walks.</figcaption>
+                </figure>
+            </div>
+
             <h4>Hongdae (<span class="kr">홍대</span>)</h4>
             <p>
                 A vibrant, youth-centric hub near <strong>Hongik University</strong>
@@ -371,7 +424,7 @@
                 skincare shops, and shopping in general. Get ready for extremely chaotic streets!
             </p>
 
-            <h4>Other Spots</h4>
+            <h4>Other spots</h4>
             <ul>
                 <li>
                     <strong>N Seoul Tower (Namsan Tower)</strong> (<span class="kr">N서울타워</span>), the symbol of
@@ -488,7 +541,7 @@
                 go into detail on every one, just a few notes and pointers.
             </p>
 
-            <h3>The top picks (for some extra few days)</h3>
+            <h3>The top picks (for a few extra days)</h3>
             <p>
                 If you have some extra days, the must-visit cities are
                 <strong>Busan</strong> (<span class="kr">부산</span>),
@@ -496,18 +549,41 @@
                 <strong>Gyeongju</strong> (<span class="kr">경주</span>). Plenty of great
                 recommendations exist online for these (or feel free to ask me!).
             </p>
+            <p>
+                One Busan-specific tip: definitely visit
+                <a href="https://share.google/jHi2OkalVWBppFE0T" target="_blank">DUF</a>,
+                possibly the best café I have ever been to in my life.
+            </p>
 
-            <h3>...if you have even more time...</h3>
+            <h3>If you have even more time</h3>
             <p>
                 Consider <strong>Suwon</strong> (<span class="kr">수원</span>),
-                <strong>Andong</strong> (<span class="kr">안동</span>),
-                <strong>Daejeon</strong> (<span class="kr">대전</span>), or the
-                <strong>Suncheon</strong> (<span class="kr">순천</span>) area.
+                <strong>Andong</strong> (<span class="kr">안동</span>), or
+                <strong>Daejeon</strong> (<span class="kr">대전</span>).
             </p>
             <p>
-                Daejeon and Suncheon are not on the usual tourist routes, Daejeon because it's simply
-                not a touristic city, and Suncheon because what's interesting there is not the city
-                itself but the scattered niche natural and historical sites in the surrounding region. For this reason, I will provide some personal less-touristic recommendations on these two options.
+                Or, if you are more interested in natural explorations, I would suggest one of:
+            </p>
+            <ul>
+                <li>
+                    <strong>Seoraksan National Park</strong>
+                    (<span class="kr">설악산국립공원</span>), for the most amazing hiking. You
+                    could combine it with some exploration of the east coast, including
+                    <strong>Sokcho</strong> (<span class="kr">속초</span>) and
+                    <strong>Gangneung</strong> (<span class="kr">강릉</span>) (and a bit of
+                    surfing, if you'd like!).
+                </li>
+                <li>
+                    The <strong>Suncheon</strong> (<span class="kr">순천</span>) area, full of
+                    hidden gems and characterized by a wonderful wetland landscape.
+                </li>
+            </ul>
+            <p>
+                Daejeon and Suncheon are not on the usual tourist routes: Daejeon because it's
+                simply not a touristic city, and Suncheon because what's interesting there is not
+                the city itself but the niche natural and historical sites scattered across the
+                surrounding region. For this reason, I'll share a few personal less-touristic
+                recommendations for each below.
             </p>
 
             <h3>Daejeon (<span class="kr">대전</span>)</h3>
@@ -521,8 +597,9 @@
                     and honestly very cool in my opinion. Say hi to the geese!
                 </li>
                 <li>
-                    <strong>Hanbat Arboretum</strong> (<span class="kr">한밭수목원</span>), the largest
-                    man-made urban arboretum in Korea, and the surrounding Expo area!
+                    <strong>Hanbat Arboretum</strong> (<span class="kr">한밭수목원</span>),
+                    the largest man-made urban arboretum in Korea! Plus the surrounding Expo
+                    area.
                 </li>
                 <li>
                     <strong>Uam Historical Park</strong> (<span class="kr">우암사적공원</span>).
@@ -551,6 +628,11 @@
                     (<span class="kr">순천만국가정원</span>).
                 </li>
             </ul>
+
+            <figure>
+                <img src="suncheon_wetlands.jpg" alt="Suncheon Bay Wetlands landscape">
+                <figcaption>The Suncheon Bay Wetlands (순천만습지), from my visit.</figcaption>
+            </figure>
 
             <!-- ── Section 5 ── -->
             <h2 id="section-5">5. Closing Thoughts</h2>

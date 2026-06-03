@@ -21,7 +21,7 @@ const publications = [
         title: "Uncertainty-aware Machine Learning Interatomic Potentials via Learned Functional Perturbations",
         authors: "<strong>Olga Zaghen*</strong>, Maksim Zhdanov*, Dario Coscia, David Wessels, Erik Bekkers",
         venue: "Preprint",
-        url: "https://arxiv.org/abs/2511.03068",
+        url: "https://arxiv.org/abs/2605.19939",
         year: "2026",
         highlight: null
     },

@@ -18,12 +18,20 @@
 
 const publications = [
     {
+        title: "Uncertainty-aware Machine Learning Interatomic Potentials via Learned Functional Perturbations",
+        authors: "<strong>Olga Zaghen*</strong>, Maksim Zhdanov*, Dario Coscia, David Wessels, Erik Bekkers",
+        venue: "Preprint",
+        url: "https://arxiv.org/abs/2511.03068",
+        year: "2026",
+        highlight: null
+    },
+    {
         title: "Graph Homomorphism Distortion: A Metric to Distinguish Them All and in the Latent Space Bind Them",
         authors: "Martin Carrasco*, <strong>Olga Zaghen*</strong>, Kavir Sumaraj, Erik Bekkers, Bastian Rieck",
-        venue: "Under review",
+        venue: "Preprint",
         url: "https://arxiv.org/abs/2511.03068",
-        year: "2025",
-        highlight: "Under review"
+        year: "2026",
+        highlight: null
     },
     {
         title: "Riemannian Variational Flow Matching for Material and Protein Design",
